@@ -36,5 +36,5 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
 )
 
 default_pkg_preinst(){
-  make findcompiz_install
+  cmake_run emake findcompiz_install
 }
