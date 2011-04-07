@@ -1,5 +1,8 @@
 # Copyright 2008, 2009, 2010 Ingmar Vanhassel <ingmar@exherbo.org>
 # Distributed under the terms of the GNU General Public License v2
+# 
+# I'm using it as example ---sanaris
+
 
 MY_PNV=${PN}_$(ever replace_all '_')
 

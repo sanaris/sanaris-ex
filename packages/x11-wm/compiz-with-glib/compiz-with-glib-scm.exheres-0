@@ -20,6 +20,8 @@ MYOPTIONS=""
 DEPENDENCIES="
     build:
     build+run:
+      gnome-desktop/librsvg
+      sys-apps/dbus
 "
 
 BUGS_TO=""
