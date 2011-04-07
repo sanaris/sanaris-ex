@@ -1,4 +1,4 @@
-# Copyright 2011 <Yury Vorobyov>
+# Copyright 2011 Yury Vorobyov <teupollam@gmail.com>
 # Distributed under the terms of the GNU General Public License v2
 
 SCM_REPOSITORY="git://git.compiz.org/users/dbo/compiz-with-glib-mainloop"
@@ -25,6 +25,7 @@ DEPENDENCIES="
 "
 
 BUGS_TO=""
+REMOTE_IDS="launchpad:unity"
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
@@ -34,4 +35,6 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DCMAKE_INSTALL_PREFIX=/opt/unity
 )
 
-
+default_pkg_preinst(){
+  make findcompiz_install
+}
