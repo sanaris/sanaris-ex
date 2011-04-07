@@ -1,14 +1,13 @@
 # Copyright 2011 <Yury Vorobyov>
 # Distributed under the terms of the GNU General Public License v2
 
-require scm-git cmake
-
+require scm cmake
 SCM_REPOSITORY="git://git.compiz.org/users/dbo/compiz-with-glib-mainloop"
-
+SCM_TYPE=git
 
 SUMMARY="Compiz with Glib Mainloop"
 DESCRIPTION="
-If DESCRIPTION is set it must not be an empty string.
+This package needed for Unity desktop
 "
 HOMEPAGE=""
 DOWNLOADS=""
