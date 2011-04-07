@@ -1,9 +1,9 @@
 # Copyright 2011 <Yury Vorobyov>
 # Distributed under the terms of the GNU General Public License v2
 
-require scm cmake
 SCM_REPOSITORY="git://git.compiz.org/users/dbo/compiz-with-glib-mainloop"
 SCM_TYPE=git
+require scm cmake
 
 SUMMARY="Compiz with Glib Mainloop"
 DESCRIPTION="
