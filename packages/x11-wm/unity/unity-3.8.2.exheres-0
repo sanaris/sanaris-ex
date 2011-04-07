@@ -1,0 +1,122 @@
+# Copyright 2011 <Yury Vorobyov>
+# Distributed under the terms of the GNU General Public License v2
+
+#require scm
+
+SUMMARY="Unity: A desktop experience designed for efficiency of space and interaction."
+DESCRIPTION="
+
+"
+HOMEPAGE="https://launchpad.net/unity"
+DOWNLOADS="http://launchpad.net/unity/3.0/3.8.2/+download/unity-3.8.2.tar.bz2"
+
+LICENCES="GNU GPL v3, GNU LGPL v3 "
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    build+run:
+        x11-libs/cairo
+        dev-lang/vala
+        sys-devel/cmake
+        dev-scm/bzr
+"
+
+BUGS_TO=""
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+# from now and next
+    git clone git://git.compiz.org/users/dbo/compiz-with-glib-mainloop
+    cd compiz-with-glib-mainloop
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/opt/unity
+    make
+    make findcompiz_install
+    make install
+
+    export PKG_CONFIG_PATH=/opt/unity/lib/pkgconfig:${PKG_CONFIG_PATH}
+    export LD_LIBRARY_PATH=/opt/unity/lib:${LD_LIBRARY_PATH}
+    export LD_RUN_PATH=/opt/unity/lib:${LD_RUN_PATH}
+
+    git clone git://git.compiz.org/compiz/compizconfig/libcompizconfig
+    cd libcompizconfig
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/opt/unity
+    make
+    make install
+
+    git clone git://git.compiz.org/compiz/compizconfig/compizconfig-python
+    cd compizconfig-python
+    python setup.py install --prefix=/opt/unity
+
+    git clone git://git.compiz.org/compiz/compizconfig/ccsm
+    cd ccsm
+    python setup.py install --prefix=/opt/unity
+
+    git clone git://git.compiz.org/compiz/plugins-main
+    cd plugins-main
+    git submodule init
+    git pull origin master
+    git submodule update
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/opt/unity
+    make
+    make install
+
+    git clone git://git.compiz.org/compiz/plugins-extra
+    cd plugins-extra
+    git submodule init
+    git pull origin master
+    git submodule update
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_INSTALL_PREFIX=/opt/unity
+    make
+    sudo make install
+
+    bzr branch lp:nux
+    cd nux
+    ./autogen.sh --disable-documentation -prefix=/opt/unity
+    make
+    make install
+
+# to here -- need to sample in packages
+
+src_compile() {
+    bzr branch lp:unity
+    mkdir build
+    cd build
+    cmake .. -DCMAKE_BUILD_TYPE=Debug -DCOMPIZ_PLUGIN_INSTALL_TYPE=package -DCMAKE_INSTALL_PREFIX=/opt/unity
+    make
+    make install
+
+}
+
+MESSAGE="
+ Testing
+
+  add this to your /home/$USER/.bashrc
+
+    function compiz-unity-setup-env
+      {
+         export PATH=/opt/unity/bin:${PATH}
+         export PYTHONPATH=/opt/unity/lib/python2.6/site-packages
+      }
+
+  Logout, login, then in a terminal do
+      $ compiz-unity-setup-env
+      $ compiz --replace cpp &
+      $ ccsm
+  
+  And then use the CompizConfig Settings Window to
+  search for and enable the Unity plugin!
+"
+
