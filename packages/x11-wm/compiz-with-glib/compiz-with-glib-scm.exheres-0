@@ -35,6 +35,15 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DCMAKE_INSTALL_PREFIX=/opt/unity
 )
 
-default_pkg_preinst(){
-  cmake_run emake findcompiz_install
+#default_pkg_preinst(){
+#  cmake_run emake findcompiz_install
+#}
+
+compiz-with-glib_src_install(){
+
+  cmake_src_install
+
+  insinto /usr/share/cmake/Modules
+  doins cmake/FindCompiz.cmake
 }
+
