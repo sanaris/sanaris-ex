@@ -1,0 +1,13 @@
+diff --git a/configure b/configure
+index c864af6..ebac4bb 100755
+--- a/configure
++++ b/configure
+@@ -39,7 +39,7 @@ fi
+ 
+ echo -n "checking for vte headers... "
+ 
+-if [ -f "/usr/include/vte/vte.h" ]; then
++if [ -f "/usr/include/vte-0.0/vte/vte.h" ]; then
+ 	echo "ok"
+ else
+ 	echo "no"

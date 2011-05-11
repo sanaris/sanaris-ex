@@ -1,0 +1,46 @@
+# Copyright 2011 <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="simple alsamixer alike tray applet"
+DESCRIPTION="
+Simple applet designed to sit in the Fluxbox system tray and popup an alsamixer window when clicked.
+"
+HOMEPAGE="http://sandbox.ltmnet.com/fbmix"
+DOWNLOADS="http://sandbox.ltmnet.com/download/24 -> fbmix-0.3.tar.bz2"
+
+LICENCES="GPL v3"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    build+run:
+        dev-libs/vte
+        x11-libs/gtk+:2
+        sys-sound/alsa-utils
+"
+
+BUGS_TO="lisa@ltmnet.com"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+DEFAULT_SRC_PREPARE_PATCHES=( ${FILES}/vte.patch ${FILES}/vte2.patch )
+
+src_install(){
+
+    WORG="/var/tmp/paludis/build/x11-wm-fbmix-0.3/work/fbmix-0.3"
+    dobin ${WORG}/fbmix || die
+
+    insinto /usr/share/icons/
+    doins ${WORG}/icons/fbmix.png || die
+
+    dodir /usr/share/fbext/fbmix/
+    insinto /usr/share/fbext/fbmix/
+    newins ${WORG}/conf/fbmix config || die
+
+}
+

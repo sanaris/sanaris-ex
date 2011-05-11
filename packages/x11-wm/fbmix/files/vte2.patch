@@ -1,0 +1,26 @@
+diff --git a/src/callbacks.c b/src/callbacks.c
+index 826e8b7..a558bb4 100644
+--- a/src/callbacks.c
++++ b/src/callbacks.c
+@@ -17,7 +17,7 @@
+ * with this program.  If not, see <http://www.gnu.org/licenses/>
+ ************************************************************************/
+ 
+-#include <vte/vte.h>
++#include <vte-0.0/vte/vte.h>
+ #include <gtk/gtk.h>
+ #include <stdio.h>
+ 
+diff --git a/src/fbmix.c b/src/fbmix.c
+index 2c095ea..ae5cd69 100644
+--- a/src/fbmix.c
++++ b/src/fbmix.c
+@@ -17,7 +17,7 @@
+ * with this program.  If not, see <http://www.gnu.org/licenses/>
+ ************************************************************************/
+ 
+-#include <vte/vte.h>
++#include <vte-0.0/vte/vte.h>
+ #include <gtk/gtk.h>
+ #include <stdio.h>
+ #include <string.h>
