@@ -1,0 +1,207 @@
+# Copyright 2009, 2010 Ingmar Vanhassel
+# Copyright 2010 Wulf C. Krueger <philantrop@exherbo.org>
+# Copyright 2010 Piotr Jaorszyński <p.jaroszynski@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require makeself alternatives
+
+SUMMARY="NVIDIA X11 driver and GLX libraries"
+HOMEPAGE="http://www.nvidia.com/"
+
+if ever at_least 256.35 ; then
+    AMD64_PNV="NVIDIA-Linux-x86_64-${PV}.run"
+    X86_PNV="NVIDIA-Linux-x86-${PV}.run"
+else
+    AMD64_PNV="NVIDIA-Linux-x86_64-${PV}-pkg2.run"
+    X86_PNV="NVIDIA-Linux-x86-${PV}-pkg0.run"
+fi
+
+DOWNLOADS="
+listed-only:
+    platform:amd64? ( ftp://download.nvidia.com/XFree86/Linux-x86_64/${PV}/${AMD64_PNV} )
+    platform:x86?   ( ftp://download.nvidia.com/XFree86/Linux-x86/${PV}/${X86_PNV} )
+"
+
+BUGS_TO="philantrop@exherbo.org"
+
+LICENCES="NVIDIA"
+SLOT="0"
+MYOPTIONS="platform: amd64 x86"
+
+DEPENDENCIES="
+    build:
+        dev-util/pkg-config
+    run:
+        dev-libs/atk
+        dev-libs/glib:2
+       !x11-dri/eclectic-opengl
+        x11-libs/gtk+:2
+        x11-libs/libX11
+        x11-libs/libXau
+        x11-libs/libXdmcp
+        x11-libs/libXext
+        x11-libs/libXv
+        x11-libs/libXvMC
+        x11-libs/pango
+    build+run:
+        x11-server/xorg-server[xinerama]
+    suggestion:
+        x11-libs/libvdpau[>=0.3]
+"
+
+src_unpack() {
+    unpack_makeself
+}
+
+src_prepare() {
+    local desktop_path=usr/share/applications/nvidia-settings.desktop
+    if ever at_least 256.35 ; then
+       desktop_path=nvidia-settings.desktop
+    fi
+
+    default
+
+    edo sed -e 's:__UTILS_PATH__:/usr/bin:' \
+        -e 's:__PIXMAP_PATH__:/usr/share/pixmaps:' \
+        -i "${desktop_path}"
+}
+
+src_configure() {
+    moduledir=$(pkg-config --variable=moduledir xorg-server)
+    [[ -z ${moduledir} ]] && die "Sanity check failed: \$(pkg-config --variable=moduledir xorg-server) returned nothing"
+}
+
+src_install_old() {
+    # /usr/lib*/xorg/modules/
+    for f in $(find usr/X11R6/lib/modules/ -type f) ; do
+        case ${f} in
+            *drivers*) exeinto ${moduledir}/drivers/ ;;
+            *extensions*) exeinto ${moduledir}/extensions/ ;;
+            *)  exeinto ${moduledir} ;;
+        esac
+        doexe ${f}
+    done
+
+    # /usr/bin
+    dobin usr/bin/{nvidia*,tls*}
+
+    dolib.so usr/lib/*so* usr/X11R6/lib/lib*
+
+    exeinto /usr/${LIBDIR}/tls/
+    doexe usr/lib/tls/*
+
+    # nvidia-settings .desktop file, icon
+    insinto /usr/share/
+    doins -r usr/share/{applications,pixmaps}
+
+    # docs
+    dodoc pkg-history.txt usr/share/doc/{NVIDIA_Changelog,README.txt,XF86Config.sample}
+    docinto html
+    dodoc -r usr/share/doc/html/*
+
+    # man-pages
+    edo gunzip usr/share/man/man1/*.gz
+    doman usr/share/man/man1/nvidia-{settings,xconfig}*
+
+    # kernel module source
+    insinto /usr/src/nvidia-drivers
+    doins -r usr/src/nv/*
+}
+
+src_install_256() {
+    # libvdpau{,_trace}.so* collide with x11-libs/libvdpau
+    edo sed -e '/libvdpau\.so/d' -e '/libvdpau_trace\.so/d' -i .manifest
+
+    # parse the .manifest file to figure out where to install stuff
+    while read line ; do
+        line=( $line )
+        case ${line[2]} in
+            UTILITY_BINARY)
+                dobin ${line[0]}
+                ;;
+            MANPAGE)
+                edo gunzip ${line[0]}
+                doman ${line[0]%.gz}
+                ;;
+            XMODULE_SHARED_LIB)
+                exeinto ${moduledir}/${line[3]}
+                doexe ${line[0]}
+                ;;
+            XMODULE_SYMLINK)
+                ;;
+            XLIB_SHARED_LIB|UTILITY_LIB)
+                dolib.so ${line[0]}
+                ;;
+            XLIB_SYMLINK|UTILITY_LIB_SYMLINK)
+                dosym ${line[3]} /usr/${LIBDIR}/${line[0]}
+                ;;
+            OPENGL_LIB|VDPAU_LIB|CUDA_LIB)
+                if [[ ${line[3]} == "NATIVE" ]] ; then
+                    exeinto /usr/${LIBDIR}/${line[4]}
+                    doexe ${line[0]}
+                fi
+                ;;
+            VDPAU_SYMLINK|CUDA_SYMLINK)
+                if [[ ${line[3]} == "NATIVE" ]] ; then
+                    dosym ${line[5]} /usr/${LIBDIR}/${line[4]}/${line[0]}
+                fi
+                ;;
+            TLS_LIB)
+                if [[ ${line[3]} == "NATIVE" ]] ; then
+                    exeinto /usr/${LIBDIR}/${line[5]}
+                    doexe ${line[0]}
+                fi
+                ;;
+        esac
+    done < .manifest
+
+    # nvidia-settings .desktop file, icon
+    insinto /usr/share/applications
+    doins nvidia-settings.desktop
+    insinto /usr/share/pixmaps
+    doins nvidia-settings.png
+
+    # docs
+    dodoc pkg-history.txt NVIDIA_Changelog README.txt
+    docinto html
+    dodoc -r html/*
+
+    # kernel module source
+    insinto /usr/src/nvidia-drivers
+    doins -r kernel/*
+}
+
+src_install() {
+    if ever at_least 256.35; then
+        src_install_256
+    else
+        src_install_old
+    fi
+
+    hereenvd 40nvidia <<EOF
+LDPATH="/usr/${LIBDIR}/vdpau"
+EOF
+
+    # alternatives
+    local alternatives=() i
+    for i in /usr/${LIBDIR}/libGL.so.${PV} ${moduledir}/extensions/libglx.so.${PV} ; do
+        alternatives+=( ${i%.${PV}} ${i} )
+    done
+
+    # Some packages link to libGL.so.1, so also provide that symlink
+    alternatives+=( /usr/${LIBDIR}/libGL.so.{1,${PV}} )
+
+    alternatives_for opengl ${PN} 1 ${alternatives[@]}
+}
+
+pkg_postinst() {
+    alternatives_pkg_postinst
+
+    elog "The kernel modules source is installed into /usr/src/nvidia-drivers/"
+    elog "You will have to compile it by hand. Make sure the 'nvidia' kernel module is loaded."
+    elog "Make sure you use the bfd linker to link the module, using gold"
+    elog "seems to result in a broken module, so don't forget to run"
+    elog "'eclectic ld set bfd' as root."
+    elog "Do not forget to run 'eclectic opengl set nvidia-drivers' as root."
+}
+
