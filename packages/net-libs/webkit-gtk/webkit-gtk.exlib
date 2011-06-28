@@ -1,0 +1,19 @@
+# Copyright 2009 Saleem Abdulrasool <compnerd@compnerd.org>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Web Browser Engine based on WebKit"
+HOMEPAGE="http://www.webkit.org/"
+DOWNLOADS="http://webkitgtk.org/webkit-${PV}.tar.gz"
+
+LICENCES="LGPL-2 LGPL-2.1 BSD-3"
+
+if ever at_least 1.3.1 && ! ever is_scm ; then
+    WORK="${WORKBASE}/webkit-${PV}"
+fi
+
+src_compile() {
+    edo mkdir -p "${WORK}/DerivedSources/webkit"    \
+                 "${WORK}/DerivedSources/WebCore"
+    default
+}
+
