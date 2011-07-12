@@ -1,0 +1,58 @@
+# Copyright 2011 <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake
+
+SUMMARY="EiskaltDC++"
+DESCRIPTION="
+Eiskalt DC++ client
+"
+HOMEPAGE="http://code.google.com/p/eiskaltdc/"
+DOWNLOADS=""
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="iconv idn gtk"
+
+DEPENDENCIES="
+    build:
+    build+run:
+        sys-libs/zlib
+        iconv? ( text-libs/libiconv )
+        sys-devel/gettext
+        dev-libs/openssl:[>=0.8.9]
+        lua? ( dev-lang/lua:[=5.1] )
+        pcre? ( dev-libs/pcre ) 
+        miniupnpc? ( net-libs/miniupnpc ) [[ note = [ UPnP network discovery ] ]]
+        idn? ( net-dns/libidn ) [[ note = [ Internatoional Domain Network support ] ]]
+        
+        qt? (
+            x11-libs/qt:[>=4.4.0]
+            app-spell/aspell
+        ) [[ note = [ qt version of GUI ]  ]]
+        
+        gtk? (
+            libpango
+            libgtk2:[>=2.10]
+            libglib2:[>=2.10]
+            libglade2:[>=2.4]
+            libnotify:[>=0.4.1]
+            libgnome2
+        ) [[ note = [ GTK version of GUI ]
+"
+
+BUGS_TO=""
+
+# i've used  
+# -DCMAKE_BUILD_TYPE=Release 
+# -DCMAKE_INSTALL_PREFIX=/home/san/eiskaltdcpp_bin/
+# -DUSE_QT=OFF -DUSE_GTK=ON -DUSE_LIBNOTIFY=OFF
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    -DCMAKE_BUILD_TYPE=Release
+    -DCMAKE_INSTALL_PREFIX=/usr
+)
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+
