@@ -36,9 +36,11 @@ DEPENDENCIES="
 
 DEFAULT_SRC_CONFIGURE_PARAMS=( --enable-nls )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( imlib2 xinerama )
+
 #DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( slit remember toolbar 
 #regexp newwmspec timed-cache gnome xft
-#xrender xpm imlib2 xmb xinerama shape randr )
+#xrender xpm imlib2 xmb xinerama shape randr randr1.2 fribidi )
+
 #DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( X )
 
 
