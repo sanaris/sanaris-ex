@@ -7,7 +7,7 @@ DOWNLOADS="ftp://ftp.inet.no/pub/socks/${P}.tar.gz"
 
 BUGS_TO="teupollam@gmail.com"
 
-LICENSE="BSD"
+LICENCES="BSD"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
