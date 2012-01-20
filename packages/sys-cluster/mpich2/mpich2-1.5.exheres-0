@@ -1,0 +1,23 @@
+# Jan2012 Yury
+
+SUMMARY="Message Passing Interface Chameleon"
+DESCRIPTION="
+MPICH2 is a high-performance and widely portable implementation of the Messageb Passing Interface standart with both MPI-1 and MPI-2; it was developed with participation of IBM, Cray, SiCortex, Microsoft, Intel, NetEffect, Qlogic, Myricom, Ohio state Univ., UBC.
+"
+HOMEPAGE="http://www.mcs.anl.gov/research/projects/mpich2/index.php"
+DOWNLOADS="http://www.mcs.anl.gov/research/projects/mpich2/downloads/tarballs/1.5a2/mpich2-1.5a2.tar.gz"
+
+UPSTREAM_DOCUMENTATION="http://www.mcs.anl.gov/research/projects/mpich2/documentation/index.php?s=docs"
+
+LICENCES="MPICH"
+SLOT="0"
+MYOPTIONS="
+"
+
+RESTRICT="test"
+
+DEPENDENCIES="
+build:
+"
+
+ECONF_SOURCE=
