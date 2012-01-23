@@ -14,10 +14,18 @@ SLOT="0"
 MYOPTIONS="
 "
 
-RESTRICT="test"
+#RESTRICT="test"
 
 DEPENDENCIES="
 build:
 "
 
-ECONF_SOURCE=
+#ECONF_SOURCE=
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+  --disable-f77
+  --disable-fc
+  --with-pm=gforker
+  --with-device=ch3:nemesis
+  --prefix=/usr
+)
