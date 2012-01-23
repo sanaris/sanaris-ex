@@ -11,6 +11,7 @@ UPSTREAM_DOCUMENTATION="http://www.mcs.anl.gov/research/projects/mpich2/document
 
 LICENCES="MPICH"
 SLOT="0"
+PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
 "
 
