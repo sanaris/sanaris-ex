@@ -23,7 +23,7 @@ build:
 
 #ECONF_SOURCE=
 
-WORK=${WORKBASE}/mpich2-1.5a
+WORK=${WORKBASE}/mpich2-1.5a2
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
   --disable-f77
