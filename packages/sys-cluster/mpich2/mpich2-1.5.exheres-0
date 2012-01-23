@@ -9,7 +9,7 @@ DOWNLOADS="http://www.mcs.anl.gov/research/projects/mpich2/downloads/tarballs/1.
 
 UPSTREAM_DOCUMENTATION="http://www.mcs.anl.gov/research/projects/mpich2/documentation/index.php?s=docs"
 
-LICENCES="MPICH"
+LICENCES="as-is"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS="
@@ -22,6 +22,8 @@ build:
 "
 
 #ECONF_SOURCE=
+
+WORK=${WORKBASE}/mpich2-1.5a
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
   --disable-f77
