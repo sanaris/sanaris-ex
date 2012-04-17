@@ -1,0 +1,15 @@
+# Copyright 2011 Elias Pipping <pipping@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+# in my own setting @ Yury Vorobyov
+
+SUMMARY="Library for storing and managing data."
+HOMEPAGE="http://www.hdfgroup.org/HDF5/"
+DOWNLOADS="http://www.hdfgroup.org/ftp/HDF5/releases/${PNV}/src/${PNV}.tar.bz2"
+
+LICENCES="${PN}"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS=""
+
+DEFAULT_SRC_TEST_PARAMS=( TIME=echo )

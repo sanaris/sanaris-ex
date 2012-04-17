@@ -1,9 +1,0 @@
-# Copyright 2010 Ingmar Vanhassel
-# Distributed under the terms of the GNU General Public License v2
-
-require nvidia-drivers
-
-PLATFORMS="~amd64 ~x86"
-
-DEFAULT_SRC_PREPARE_PATCHES+=( -p0 "${FILES}/${PN}-256-2.6.36.patch" )
-
