@@ -5,7 +5,7 @@
 
 SUMMARY="Library for storing and managing data."
 HOMEPAGE="http://www.hdfgroup.org/HDF5/"
-DOWNLOADS="http://www.hdfgroup.org/ftp/HDF5/releases/${PNV}/src/${PNV}.tar.bz2"
+DOWNLOADS="http://www.hdfgroup.uiuc.edu/ftp/pub/outgoing/hdf5/snapshots/v19/${PNV}.tar.bz2"
 
 LICENCES="${PN}"
 SLOT="0"
