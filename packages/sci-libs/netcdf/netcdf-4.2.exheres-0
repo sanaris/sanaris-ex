@@ -1,0 +1,19 @@
+# 2012 Yury Vorobyov
+
+SUMMARY="Network Common Data Form"
+DESCRIPTION="libraries and data formats for creation, access, and sharing of array-oriented scientific data"
+HOMEPAGE="http://unidata.ucar.edu/software/netcdf"
+
+LICENCES="NetCDF"
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build+run:
+        sci-libs/hdf5
+"
+
+DEFAULT_SRC_CONFIGURE_FLAGS=()
+DEFAULT_SRC_TEST_PARAMS=()
+
