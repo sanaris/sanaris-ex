@@ -1,0 +1,32 @@
+# Copyright 2012 Yury <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="OpenCL AMD Drivers Beta"
+DESCRIPTION="
+Use this drivers in conjunction with amd-app-sdk
+"
+HOMEPAGE="http://developer.amd.com"
+DOWNLOADS="http://developer.amd.com/Downloads/OpenCL1.2betadriversLinux.tgz"
+
+LICENCES="AMD"
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    run:
+        sci-libs/amd-app-sdk
+"
+
+BUGS_TO=""
+
+src_unpack() {
+
+}
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+
