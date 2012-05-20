@@ -1,0 +1,29 @@
+# Copyright 2012 Yury <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Interactive Visualization Tool"
+DESCRIPTION="
+Free interactive parallel visualization and graphical analysis tool 
+for viewing scientific data on Unix. 
+Designed to handle very large data set sizes in the terascale range.
+"
+HOMEPAGE="http://wci.llnl.gov/codes/visit/about.html"
+DOWNLOADS="http://portal.nersc.gov/svn/visit/trunk/releases/2.5.0/visit2.5.0.tar.gz"
+
+LICENCES=""
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    build+run:
+"
+
+BUGS_TO=""
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+
