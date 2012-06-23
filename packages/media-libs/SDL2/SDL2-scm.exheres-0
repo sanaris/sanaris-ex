@@ -1,0 +1,55 @@
+# Copyright 2008 Anders Ossowicki <arkanoid@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="http://hg.libsdl.org/SDL"
+SCM_TYPE=hg
+require scm
+
+SUMMARY="The Simple DirectMedia Layer library"
+HOMEPAGE="http://libsdl.org"
+LICENCES="LGPL-2.1"
+SLOT="2"
+PLATFORMS="~amd64 ~ppc64 ~x86"
+MYOPTIONS=""
+DEPENDENCIES="
+    build+run:
+        sys-sound/alsa-lib
+        
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXcursor
+        x11-libs/libXinerama
+        x11-libs/libXi
+        x11-libs/libXrandr
+        x11-libs/libXxf86vm
+        
+        x11-libs/libICE
+
+        x11-dri/mesa
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( --prefix=/usr )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+ECONF_SOURCE=${WORK}
+
+src_configure()
+{
+    mkdir ${WORK}/build
+    cd ${WORK}/build
+    default
+}
+
+src_compile()
+{
+    cd ${WORK}/build
+    default
+}
+
+src_install()
+{
+    cd ${WORK}/build
+    default
+}
+

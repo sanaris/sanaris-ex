@@ -1,0 +1,27 @@
+# Copyright 2012 Yury <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Free Pascal Compiler"
+DESCRIPTION="
+Originally created by Florian Klamplf; has own Object Pascal, Borland, Delphi and other dialects
+"
+HOMEPAGE="http://www.freepascal.org"
+DOWNLOADS="ftp://ftp.freepascal.org/pub/fpc/snapshot/trunk/source/fpcbuild.zip"
+
+LICENCES="GPL"
+SLOT="0"
+PLATFORMS="~x86 ~amd64"
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+    build+run:
+"
+
+BUGS_TO=""
+
+DEFAULT_SRC_CONFIGURE_PARAMS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
+
+
