@@ -1,0 +1,13 @@
+# Copyright 2012 Elias Pipping <pipping@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+#SCM_REPOSITORY="http://llvm.org/git/llvm.git"
+SCM_REPOSITORY="git://people.freedesktop.org/~tstellar/llvm"
+SCM_BRANCH="master"
+
+require scm-git llvm
+
+DEFAULT_SRC_CONFIGURE_PARAMS+=( --enable-experimental-targets=AMDGPU )
+
+PLATFORMS="~amd64"
+
