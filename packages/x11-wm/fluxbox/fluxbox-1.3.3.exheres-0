@@ -1,0 +1,42 @@
+# Copyright (c) 2008 Alexander Færøy <ahf@exherbo.org>
+# Copyright (c) 2012 Saleem Abdulrasool <compnerd@compnerd.org>
+# Distributed under the terms of the GNU General Public License v2
+
+require common-metadata
+
+DOWNLOADS="mirror://sourceforge/${PN}/${PNV}.tar.lzma"
+SLOT="0"
+PLATFORMS="~amd64 ~ppc64 ~x86"
+MYOPTIONS="
+    bidi [[ description = [ support bidirectional text through fribidi ] ]]
+    xrandr [[ description = [ X resolution ] ]]
+    xinerama
+    imlib2
+"
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+    build+run:
+        x11-libs/libX11
+        x11-libs/libXext
+        x11-libs/libXft
+        x11-libs/libXrender
+        x11-libs/libXpm
+        xrandr? ( x11-libs/libXrandr[>=1.2] )
+        bidi? ( dev-libs/fribidi )
+        xinerama? ( x11-libs/libXinerama )
+        imlib2? ( media-libs/imlib2 )
+    run:
+        x11-apps/xmessage
+"
+
+src_configure() {
+    econf --enable-nls                  \
+          $(option_enable bidi fribidi) \
+          $(option_enable xrandr randr) \
+          $(option_enable xinerama)     \
+          $(option_enable imlib2)       \
+          $(expecting_tests && echo --enable-tests)
+}
+
