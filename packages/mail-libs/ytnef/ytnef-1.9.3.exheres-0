@@ -21,6 +21,3 @@ DEPENDENCIES="
 
 DEFAULT_SRC_COMPILE_PARAMS+=()
 
-src_configure() {
-}
-
