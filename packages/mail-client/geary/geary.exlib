@@ -43,6 +43,7 @@ DEPENDENCIES="
         gnome-desktop/gspell
         dev-libs/libhandy
         dev-libs/libpeas
+        mail-libs/ytnef
 "
 
 geary_src_test() {
