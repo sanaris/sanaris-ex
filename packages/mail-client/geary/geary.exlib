@@ -1,0 +1,63 @@
+# Copyright 2018 Rasmus Thomsen <cogitri@exherbo.org>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="https://gitlab.gnome.org/GNOME/geary.git"
+ever is_scm || SCM_TAG="${PNV}"
+
+require scm-git gsettings meson vala [ vala_dep=true ]
+require gtk-icon-cache freedesktop-desktop
+require test-dbus-daemon
+
+export_exlib_phases src_test pkg_postinst pkg_postrm
+
+SUMMARY="Geary is an email application built around conversations, for the GNOME 3 desktop"
+SLOT="0"
+LICENCES="LGPL-2.1"
+
+MYOPTIONS=""
+
+DEPENDENCIES="
+    build:
+        sys-devel/gettext
+        virtual/pkg-config
+    build+run:
+        app-spell/enchant:0[>=1.6]
+        app-text/iso-codes
+        base/libgee:0.8[>=0.8.5]
+        dev-db/sqlite:3[>=3.12]
+        dev-libs/glib:2[>=2.54]
+        dev-libs/libunwind[>=1.1]
+        dev-libs/libxml2:2.0[>=2.7.8]
+        gnome-desktop/gcr[>=3.10.1]
+        gnome-desktop/gobject-introspection:1
+        gnome-desktop/gnome-online-accounts
+        gnome-desktop/libsoup:2.4[>=2.48]
+        media-libs/libcanberra[>=0.28]
+        net-libs/webkit:4.0[>=2.20]
+        net-utils/gmime:2.6[>=2.6.17]
+        net-utils/gmime:3.0
+        x11-libs/gtk+:3[>=3.22.26]
+        x11-libs/libnotify[>=0.7.5]
+        app-spell/enchant
+        net-im/folks
+        gnome-desktop/gspell
+        dev-libs/libhandy
+        dev-libs/libpeas
+"
+
+geary_src_test() {
+    test-dbus-daemon meson_src_test
+}
+
+geary_pkg_postinst() {
+    gsettings_pkg_postinst
+    gtk-icon-cache_pkg_postinst
+    freedesktop-desktop_pkg_postinst
+}
+
+geary_pkg_postrm() {
+    gsettings_pkg_postrm
+    gtk-icon-cache_pkg_postrm
+    freedesktop-desktop_pkg_postrm
+}
+
