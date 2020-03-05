@@ -21,3 +21,16 @@ DEPENDENCIES="
 
 DEFAULT_SRC_COMPILE_PARAMS+=()
 
+src_configure(){
+    bash autogen.sh;
+    default
+}
+
+src_compile(){
+    default
+}
+
+src_install(){
+    default
+}
+
