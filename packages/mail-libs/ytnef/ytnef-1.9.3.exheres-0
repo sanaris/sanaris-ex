@@ -1,0 +1,13 @@
+
+SUMMARY="Yeraze's TNEF Stream Reader for winmail.dat files"
+HOMEPAGE="https://github.com/Yeraze/ytnef"
+DOWNLOADS="git://github.com/Yeraze/ytnef"
+
+PLATFORMS="~amd64"
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS=""
+
+src_configure() {
+}
+
