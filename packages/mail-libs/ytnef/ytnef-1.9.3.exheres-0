@@ -1,12 +1,19 @@
 
+SCM_REPOSITORY="git://github.com/Yeraze/ytnef"
+SCM_TYPE=git
+require scm
+
 SUMMARY="Yeraze's TNEF Stream Reader for winmail.dat files"
 HOMEPAGE="https://github.com/Yeraze/ytnef"
-DOWNLOADS="git://github.com/Yeraze/ytnef"
+DOWNLOADS="https://github.com/Yeraze/ytnef"
 
 PLATFORMS="~amd64"
 LICENCES="GPL-2"
 SLOT="0"
 MYOPTIONS=""
+
+DEPENDENCIES=""
+DEFAULT_SRC_COMPILE_PARAMS+=()
 
 src_configure() {
 }
