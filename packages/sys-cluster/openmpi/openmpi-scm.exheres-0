@@ -1,8 +1,8 @@
-# Copyright 2012 Yury <teupollam@gmail.com>
-# Distributed under the terms of the GNU General Public License v2
+# CC 2012-2019 Yury Vorobyov <teupollam@gmail.com>
+# Distributed under the terms of the GNU General Public License v3
 
-SCM_REPOSITORY="https://bitbucket.org/ompiteam/ompi-svn-mirror"
-SCM_TYPE=hg
+SCM_REPOSITORY="git://github.com/open-mpi/ompi"
+SCM_TYPE=git
 require scm
 
 SUMMARY="OpenMPI"
@@ -12,25 +12,27 @@ and maintained by a consortium of academic, research, and
 industry partners: ARM, Cisco, Friedrich-Schiller-Universitat, IBM, LANL,
 NVIDIA, Oracle, SandiaNL etc.
 "
-HOMEPAGE="http://www.open-mpi.org"
+HOMEPAGE="http://www.open-mpi.org/source"
+REMOTE_IDS="github:open-mpi/ompi"
 
 LICENCES="New BSD license"
 SLOT="0"
-PLATFORMS="~x86 ~amd64"
+PLATFORMS="~amd64"
 MYOPTIONS=""
 
 DEPENDENCIES="
     build:
-        sys-devel/autoconf[>=2.60]
-        sys-devel/automake[>=1.10]
-        sys-devel/libtool[>=2.0.0]
+        sys-devel/m4
+        sys-devel/autoconf
+        sys-devel/automake
+        sys-devel/libtool
         sys-devel/flex
     build+run:
 "
 
 BUGS_TO=""
 
-DEFAULT_SRC_CONFIGURE_PARAMS=( --prefix=/usr )
+DEFAULT_SRC_CONFIGURE_PARAMS=( --prefix=/usr/x86_64-pc-linux-gnu )
 DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( )
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( )
 
